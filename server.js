@@ -10,6 +10,7 @@ app.get("/getReleasesForUsername/:username", function (req, res) {
         })
         .catch(function (error) {
             res.send(error);
+            //test
         });
 });
 
