@@ -1,11 +1,16 @@
 var express = require("express");
 var app = express();
-var albums = require("./src/albums.js");
+var releasesActions = require("./src/releasesActions.js");
 
-app.get("/listUsers", function(req, res) {
-  var allReleases = albums.getAllReleasesForUser(); // Opzoeken hoe await werkt.
-
-  res.send(allReleases);
+app.get("/getReleasesForUsername/:username", function (req, res) {
+    var username = req.params.username;
+    releasesActions.fetchReleasesForUsername(username)
+        .then(function (result) {
+            res.send(result);
+        })
+        .catch(function (error) {
+            res.send(error);
+        });
 });
 
 app.listen(3000);
