@@ -1,0 +1,27 @@
+{
+  "name": "spin-up",
+  "version": "1.0.0",
+  "description": "",
+  "main": "albums.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentRavoet/spin-up.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentRavoet/spin-up/issues"
+  },
+  "homepage": "https://github.com/VincentRavoet/spin-up#readme",
+  "dependencies": {
+    "disconnect": "^1.2.1",
+    "express": "^4.16.3",
+    "knex": "^0.15.2",
+    "mysql": "^2.15.0",
+    "request": "^2.86.0"
+  }
+}
