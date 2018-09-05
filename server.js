@@ -5,6 +5,8 @@ app.get("/getReleasesForUsername/:username", function (req, res) {
     var username = req.params.username;
     releasesActions.fetchNewestReleaseFromArtistsForUsername(username)
         .then((artistCollection) => {
+            console.log('test');
+            console.log('kak');
             res.send([artistCollection]);
         });
 });
