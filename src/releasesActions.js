@@ -3,29 +3,37 @@ var async = require("async");
 
 var col = new Discogs().user().collection();
 
-fetchReleasesForUsername = (username) => {
-    col.getReleases(username, 0, { page: 1, per_page: 1000 })
+module.exports.fetchNewestReleaseFromArtistsForUsername = (username) => {
+    return col.getReleases(username, 0, { page: 1, per_page: 1000 })
         .then((data) => {
-            fetchNewestReleaseForArtist(data.releases);
+            return fetchReleasesForArtists(data.releases);
         });
 }
 
-fetchNewestReleaseForArtist = (releases) => {
+fetchReleasesForArtists = (releases) => {
     return new Promise((resolve, reject) => {
-        if (true) {
-            var artists = [];
+        if (releases) {
+            var artistReleaseCollection = {};
 
-            for (var release in releases) {
-                artists.push(release['basic_information']); // Index waarde van basic_information zien te vinden.
-            }
-            console.log(artists);
-            resolve(artists);
+            releases.forEach(release => {
+                var releaseArtists = release.basic_information.artists;
+
+                releaseArtists.forEach(artist => {
+                    var releaseArtistName = artist.name;
+                    var releaseTitle = release.basic_information.title;
+
+                    if (!artistReleaseCollection[releaseArtistName]) {
+                        artistReleaseCollection[releaseArtistName] = [];
+                    }
+
+                    artistReleaseCollection[releaseArtistName].push(releaseTitle);
+                })
+            });
+
+            resolve(artistReleaseCollection);
         } else {
             reject(console.log('nee'));
+            return;
         }
     });
-}
-
-module.exports.fetchAllArtistsForUser = (username) => {
-    return fetchReleasesForUsername(username);
 }
