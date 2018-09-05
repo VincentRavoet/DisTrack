@@ -4,25 +4,28 @@ var async = require("async");
 var col = new Discogs().user().collection();
 
 fetchReleasesForUsername = (username) => {
-    return new Promise(function (resolve, reject) {
-        col.getReleases(username, 0, { page: 1, per_page: 1000 }, function (err, data) {
-            if (data !== null) {
-                resolve(data.releases);
-            } else {
-                reject(err);
-            }
+    col.getReleases(username, 0, { page: 1, per_page: 1000 })
+        .then((data) => {
+            fetchNewestReleaseForArtist(data.releases);
         });
+}
+
+fetchNewestReleaseForArtist = (releases) => {
+    return new Promise((resolve, reject) => {
+        if (true) {
+            var artists = [];
+
+            for (var release in releases) {
+                artists.push(release['basic_information']); // Index waarde van basic_information zien te vinden.
+            }
+            console.log(artists);
+            resolve(artists);
+        } else {
+            reject(console.log('nee'));
+        }
     });
 }
 
 module.exports.fetchAllArtistsForUser = (username) => {
-    return new Promise((resolve, reject) => {
-        fetchReleasesForUsername(username).then((releases) => {
-            if (true) {
-                resolve(releases);
-            } else {
-                reject('nee');
-            }
-        });
-    });
+    return fetchReleasesForUsername(username);
 }

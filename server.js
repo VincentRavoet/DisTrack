@@ -3,13 +3,9 @@ var releasesActions = require("./src/releasesActions.js");
 
 app.get("/getReleasesForUsername/:username", function (req, res) {
     var username = req.params.username;
-    releasesActions.fetchAllArtistsForUser(username)
-        .then(function (releases) {
-            res.send(releases);
-        })
-        .catch(function (error) {
-            res.send(error);
-        });
+    var releases = releasesActions.fetchAllArtistsForUser(username);
+
+    res.send(releases);
 });
 
 app.listen(3000);
