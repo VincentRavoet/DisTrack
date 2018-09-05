@@ -1,5 +1,4 @@
 var Discogs = require("disconnect").Client;
-var async = require("async");
 
 var col = new Discogs().user().collection();
 
@@ -33,7 +32,6 @@ fetchReleasesForArtists = (releases) => {
             resolve(artistReleaseCollection);
         } else {
             reject(console.log('nee'));
-            return;
         }
     });
 }
