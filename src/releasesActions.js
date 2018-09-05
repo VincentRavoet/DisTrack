@@ -16,7 +16,6 @@ fetchReleasesForArtists = (releases) => {
 
             releases.forEach(release => {
                 var releaseArtists = release.basic_information.artists;
-                console.log('jskfjsdkjf');
 
                 releaseArtists.forEach(artist => {
                     var releaseArtistName = artist.name;
