@@ -1,4 +1,5 @@
 var app = require("express")();
+var db = require("./src/db.js");
 var releasesActions = require("./src/releasesActions.js");
 
 app.get("/getReleasesForUsername/:username", function (req, res) {
