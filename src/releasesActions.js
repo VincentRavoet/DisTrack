@@ -18,7 +18,6 @@ fetchReleasesForArtists = (releases) => {
             var relSlice = releases.slice(1, 2);
             relSlice.forEach(release => {
                 var releaseArtists = release.basic_information.artists;
-                console.log('jskfjsdkjf');
 
                 releaseArtists.forEach(artist => {
                     var releaseArtistID = artist.id;
