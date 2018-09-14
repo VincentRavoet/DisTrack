@@ -6,7 +6,7 @@ exports.up = function (knex, Promise) {
         table.string('title').notNullable();
         table.string('discogs_release_url');
 
-        table.integer('ARTIST_ID', 10).unsigned().index().references('ARTIST_ID').inTable('ARTIST').onDelete('CASCADE');
+        table.integer('DISCOGS_ARTIST_ID').unsigned().index().references('DISCOGS_ARTIST_ID').inTable('ARTIST').onDelete('CASCADE');
 
     });
 };

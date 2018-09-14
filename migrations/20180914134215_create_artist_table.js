@@ -1,8 +1,7 @@
 
 exports.up = function (knex, Promise) {
     return knex.schema.createTable('ARTIST', function (table) {
-        table.increments('ARTIST_ID');
-        table.integer('discogs_artist_id').notNullable();
+        table.integer('DISCOGS_ARTIST_ID').unsigned().notNullable().primary();
         table.string('name').notNullable();
     });
 };
