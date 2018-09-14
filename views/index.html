@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<script>
+    $(document).ready(function () {
+        $('#truncateBtn').on('click', function () {
+            $.ajax({
+                url: "/migrate"
+            }).done(function (data) {
+                alert(data);
+            });
+        });
+    });
+</script>
+
+<body>
+    <button id="truncateBtn">Truncate</button>
+</body>
+
+</html>

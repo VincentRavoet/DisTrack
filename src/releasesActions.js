@@ -3,11 +3,11 @@ var Discogs = require("disconnect").Client;
 var localdb = require('./db.js');
 
 var client = new Discogs();
-var col = client.user().collection();
+var userCollection = client.user().collection();
 var db = client.database();
 
 module.exports.fetchNewestReleaseFromArtistsForUsername = (username) => {
-    return col.getReleases(username, 0, { page: 1, per_page: 1 })
+    return userCollection.getReleases(username, 0, { page: 1, per_page: 1 })
         .then((data) => {
             return fetchReleasesForArtists(data.releases);
         });
@@ -35,6 +35,7 @@ fetchReleasesForArtists = (releases) => {
 
                     db.getArtistReleases(releaseArtistID, params, getMostRecentReleaseCallback);
 
+                    console.log(kak);
 
                 })
             });
@@ -47,5 +48,5 @@ fetchReleasesForArtists = (releases) => {
 };
 
 var getMostRecentReleaseCallback = function (err, data, rateLimit) {
-    console.log(data);
+    //console.log(data);
 }
