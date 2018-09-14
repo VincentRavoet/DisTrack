@@ -19,7 +19,7 @@ app.get("/getReleasesForUsername/:username", (req, res) => {
         });
 });
 
-app.get("/updateReleases", (req, res) => {
+app.get("/updateReleaseForAllArtists", (req, res) => {
     releasesActions.updateReleases().then(() => {
         res.send('jaboy');
     });
