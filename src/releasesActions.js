@@ -7,12 +7,13 @@ var col = client.user().collection();
 var db = client.database();
 
 module.exports.fetchNewestReleaseFromArtistsForUsername = (username) => {
-    return col.getReleases(username, 0, { page: 1, per_page: 1000 })
+    return col.getReleases(username, 0, { page: 1, per_page: 1 })
         .then((data) => {
             return fetchReleasesForArtists(data.releases);
         });
 }
 
+// Fetch the most recent release for a specific artist.
 fetchReleasesForArtists = (releases) => {
     return new Promise((resolve, reject) => {
         if (releases) {
@@ -22,25 +23,19 @@ fetchReleasesForArtists = (releases) => {
 
                 releaseArtists.forEach(artist => {
                     var releaseArtistID = artist.id;
-                    var releaseTitle = release.basic_information.title;
+
+                    //Knal eerst de artist in de DB.
+                    var artist = { discogs_artist_id: releaseArtistID, name: artist.name };
+                    localdb.createArtist(artist);
+
                     var params = {
                         sort: 'year',
                         sort_order: 'desc',
-                    }
+                    };
 
-                    // Deze functie haalt de meest recente release voor een artist uit Discogs.
-                    // db.getArtistReleases(5003, params, artistReleasesCallback);
-
-                    var artist = { discogs_artist_id: releaseArtistID, name: artist.name };
-
-                    localdb.createArtist(artist);
+                    db.getArtistReleases(releaseArtistID, params, getMostRecentReleaseCallback);
 
 
-                    if (!artistReleaseCollection[releaseArtistID]) {
-                        artistReleaseCollection[releaseArtistID] = [];
-                    }
-
-                    artistReleaseCollection[releaseArtistID].push(releaseTitle);
                 })
             });
 
@@ -51,6 +46,6 @@ fetchReleasesForArtists = (releases) => {
     });
 };
 
-var artistReleasesCallback = function (err, data, rateLimit) {
-    console.log(data.releases[0]);
+var getMostRecentReleaseCallback = function (err, data, rateLimit) {
+    console.log(data);
 }

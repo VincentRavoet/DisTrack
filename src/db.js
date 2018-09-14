@@ -6,7 +6,6 @@ module.exports = knex;
 
 knex.migrate.latest([config]);
 
-
 module.exports.createArtist = function (artist) {
     return Promise.resolve().then(function () {
         return knex("artist").insert(artist);
