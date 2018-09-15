@@ -4,7 +4,7 @@ The information will become available via:
 - Discogs
 - Last.fm
 
-##TODO:
+## TODO:
 - Afbeeldingen in DB voor artiesten.
 - Afbeeldingen in DB voor releases.
 
