@@ -5,9 +5,7 @@ The information will become available via:
 - Last.fm
 
 ## TODO:
-- Afbeeldingen in DB voor artiesten.
 - Afbeeldingen in DB voor releases.
-
 - Return alle releases voor meegegeven artiesten.
 
 
@@ -16,3 +14,6 @@ The information will become available via:
 
 ## Nice to have:
 - releasesActions:createArtistsForUsername -> unieke artiesten opslaan
+- Associated genres: sorteren op genre
+- Artiesten met minder dan x listens verwijderen (Ollie!)
+- ...
