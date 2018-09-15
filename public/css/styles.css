@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Saira');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Saira', sans-serif;
+    background-color: #1e2126;
+    color: white;
+}
+
+#bgVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    opacity: 0.1;
+}
+
+#title h1 {
+    font-size: 80px;
+}
+
+#title {
+    margin-top: 100px;
+    text-align: center;
+}
+
+div {
+    text-align: center;
+}
+
+#vinyl-bg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0.1;
+    margin-right: -475px;
+    margin-bottom: -475px;
+}

@@ -4,21 +4,65 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/rotate.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <script>
     $(document).ready(function () {
-        $('#truncateBtn').on('click', function () {
-            $.ajax({
-                url: "/migrate"
-            }).done(function (data) {
-                alert(data);
-            });
+        $('#truncateBtn').on('click', () => {
+            sendAjax("/migrate");
         });
+
+        $('#lastfmBtn').on('click', () => {
+            sendAjax("/lastfm");
+        });
+
+        $('#updateReleasesBtn').on('click', () => {
+            sendAjax("/updateReleaseForAllArtists");
+        });
+
+        $('#getArtistsForUsername').on('submit', (e) => {
+            e.preventDefault();
+            var usernameJson = $("#getArtistsForUsername").serializeArray().reduce((m, o) => { m[o.name] = o.value; return m; }, {})
+
+            sendAjax('/getArtistsForUsername/' + usernameJson.username);
+        });
+
+        sendAjax = (url) => {
+            $.ajax({
+                url: url
+            }).done(function (data) {
+                console.log(data);
+            });
+        }
     });
 </script>
 
 <body>
-    <button id="truncateBtn">MIGREER DIE TABELLAHNN</button>
+    <video autoplay muted loop id="bgVideo">
+        <source src="img/vinyl-custom.mp4" type="video/mp4"> Your browser does not support HTML5 video.
+    </video>
+
+    <div class="container">
+        <div id="title" class="col-sm-12">
+            <h1>DisTrack</h1>
+            <p>New shit.</p>
+        </div>
+        <div class="col-sm-12">
+            <div class="col-sm-4 offset-4 mt-3">
+                <label>Haal artiesten op uit collection</label>
+                <form id="getArtistsForUsername" action="">
+                    <div class="input-group">
+                        <input id="discogs-username" name="username" class="form-control" placeholder="Gebruikersnaam..."></input>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4 offset-4 mt-3">
+                <button id="updateReleasesBtn" class="btn btn-danger w-100" disabled="disabled">Update releases</button>
+                <button id="lastfmBtn" class="btn btn-warning w-100">Lastfm</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
