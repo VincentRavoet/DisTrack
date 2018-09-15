@@ -9,3 +9,10 @@ The information will become available via:
 - Afbeeldingen in DB voor releases.
 
 - Return alle releases voor meegegeven artiesten.
+
+
+
+
+
+## Nice to have:
+- releasesActions:createArtistsForUsername -> unieke artiesten opslaan
