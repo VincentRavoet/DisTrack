@@ -16,4 +16,4 @@ The information will become available via:
 - releasesActions:createArtistsForUsername -> unieke artiesten opslaan
 - Associated genres: sorteren op genre
 - Artiesten met minder dan x listens verwijderen (Ollie!)
-- ...
+- x/x artiesten geladen + laadbalk.
