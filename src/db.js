@@ -1,10 +1,10 @@
-var config = require('../knexfile.js');
-var cmd = require('node-cmd');
-var env = 'development';
-var knex = require('knex')(config[env]);
-var LastfmAPI = require('lastfmapi');
+const config = require('../knexfile.js');
+const cmd = require('node-cmd');
+const env = 'development';
+const knex = require('knex')(config[env]);
+const LastfmAPI = require('lastfmapi');
 
-var lastfm = new LastfmAPI({
+const lastfm = new LastfmAPI({
     'api_key': '3d80c6e4dcdfbf7849574d4bfe167e1a',
     'secret': '7529f849f867aea77e676db0650e0d71'
 });
@@ -42,7 +42,7 @@ module.exports.getAllArtistIDs = () => {
     return new Promise((resolve, reject) => {
         knex('artist')
             .then((rows) => {
-                var ids = [];
+                let ids = [];
 
                 rows.forEach(element => {
                     ids.push(element.DISCOGS_ARTIST_ID);
@@ -59,19 +59,16 @@ getArtistImageLastfm = (artistName) => {
             'artist': artistName,
         }, (err, artist) => {
             try {
-                var image;
+                let image;
 
-                if (artist.image[4]) {
-                    image = artist.image[4]['#text'];
-                } else if (artist.image[3]) {
-                    image = artist.image[3]['#text'];
-                } else if (artist.image[2]) {
-                    image = artist.image[2]['#text'];
-                } else if (artist.image[1]) {
-                    image = artist.image[1]['#text'];
-                } else if (artist.image[0]) {
-                    image = artist.image[0]['#text'];
-                } else {
+                for (let i = 4; i > 0; --i) {
+                    if (artist.image[i]) {
+                        image = artist.image[i]['#text'];
+                        break;
+                    }
+                }
+
+                if (!image) {
                     image = 'NO PICTURE FOUND';
                 }
 

@@ -1,8 +1,8 @@
-var express = require("express");
-var app = express();
-var path = require('path');
-var db = require("./src/db.js");
-var releasesActions = require("./src/releasesActions.js");
+const express = require("express");
+const app = express();
+const path = require('path');
+const db = require("./src/db.js");
+const releasesActions = require("./src/releasesActions.js");
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -22,7 +22,7 @@ app.get("/lastfm", (req, res) => {
 });
 
 app.get("/getArtistsForUsername/:username", (req, res) => {
-    var username = req.params.username;
+    const username = req.params.username;
     releasesActions.getArtistsForUsername(username)
         .then((artistCollection) => {
             res.send([artistCollection]);
