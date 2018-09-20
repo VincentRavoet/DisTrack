@@ -53,6 +53,10 @@ module.exports.getAllArtistIDs = () => {
     });
 }
 
+getAlbumImageLastfm = (artistName, albumName) => {
+
+};
+
 getArtistImageLastfm = (artistName) => {
     return new Promise((resolve) => {
         lastfm.artist.getInfo({
@@ -77,6 +81,16 @@ getArtistImageLastfm = (artistName) => {
                 resolve('NO PICTURE');
             }
         });
+    });
+};
+
+module.exports.getRecentReleaseForArtist = (artistId) => {
+    return new Promise((resolve) => {
+        return knex('recent_release')
+            .where({ discogs_artist_id: artistId })
+            .then((rows) => {
+                resolve(rows);
+            });
     });
 };
 

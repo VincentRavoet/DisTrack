@@ -27,7 +27,7 @@
         });
 
         $("#discogs-username").focusout(function () {
-            $('#bgVideo').fadeTo('fast', 0.8);
+            $('#bgVideo').fadeTo('fast', 0.5);
         });
 
         $('#getArtistsForUsername').on('submit', (e) => {
@@ -66,7 +66,8 @@
                 <form id="getArtistsForUsername" autocomplete="off" action="">
                     <div class="input-group">
                         <label>
-                            <input id="discogs-username" name="username" class="form-control" placeholder="Your Discogs username" style="background-color:rgba(0,0,0,0) !important;box-shadow:none !important;"></input>
+                            <input id="discogs-username" name="username" class="form-control" placeholder="Your Discogs username"
+                                style="background-color:rgba(0,0,0,0) !important;box-shadow:none !important;"></input>
                             <span></span>
                         </label>
                     </div>

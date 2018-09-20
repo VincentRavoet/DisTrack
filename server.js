@@ -35,6 +35,14 @@ app.get("/updateReleaseForAllArtists", (req, res) => {
     });
 });
 
+app.get("/getRecentReleaseForArtist/:id", (req, res) => {
+    const id = req.params.id;
+    releasesActions.getRecentReleaseForArtist(id)
+        .then((recentRelease) => {
+            res.send('recentRelease');
+        });
+});
+
 app.listen(3000);
 
 /**

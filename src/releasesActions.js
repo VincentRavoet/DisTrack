@@ -1,7 +1,8 @@
 const Disconnect = require("disconnect");
 const Discogs = Disconnect.Client;
 const localdb = require('./db.js');
-const _ = require("lodash");
+const Artist = require('./artist/Artist.js');
+const RecentRelease = require('./recent_release/RecentRelease.js');
 
 const client = new Discogs(
     'SpinUp/1.0.0',
@@ -42,17 +43,26 @@ module.exports.updateReleases = () => {
                             err ? console.log(err) : console.log('Artist ID: ' + id);
                             if (data && data.hasOwnProperty('releases')) {
                                 const json = data.releases[0];
-                                const release = { discogs_release_id: json.id, title: json.title, discogs_release_url: json.resource_url, discogs_artist_id: id };
+                                const release = new RecentRelease(json.id, json.title, json.resource_url, id);
 
                                 localdb.createRecentRelease(release);
                             }
                         });
                     }, counter);
-                    counter += 1010;
+                    counter += 1100;
                 });
             })
     });
-}
+};
+
+module.exports.getRecentReleaseForArtist = (id) => {
+    return new Promise((resolve) => {
+        localdb.getRecentReleaseForArtist(id)
+            .then((release) => {
+                console.log(release);
+            });
+    })
+};
 
 /**
  * Create new entries for every artist in the user's collection.
@@ -65,7 +75,9 @@ createArtistsForUsername = (releases) => {
 
                 releaseArtists.forEach(artist => {
                     artistName = artist.name.replace(/ \(\d+\)/, '');
-                    const DBartist = { discogs_artist_id: artist.id, name: artistName };
+
+                    const DBartist = new Artist(artist.id, artistName);
+
                     localdb.createArtist(DBartist);
                 })
             });
