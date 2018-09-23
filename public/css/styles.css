@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Saira');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 * {
     box-sizing: border-box;
@@ -10,9 +10,14 @@
 
 body {
     margin: 0;
-    font-family: 'Saira', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background-color: #1e2126;
     color: white;
+}
+
+.container {
+    width: 100%;
+    margin: 0;
 }
 
 #bgVideo {
@@ -47,6 +52,7 @@ body {
     border: none;
     color: white;
     caret-color: #990099;
+    padding-bottom: 5px;
 }
 
 label {
@@ -92,7 +98,7 @@ label {
       color: white;
     font-size: 40px;
     float: right;
-    margin-right: 15px;
+    margin: 15px;
     transition: color .1s ease-in
   }
 

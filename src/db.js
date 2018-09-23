@@ -3,6 +3,18 @@ const cmd = require('node-cmd');
 const env = 'development';
 const knex = require('knex')(config[env]);
 const LastfmAPI = require('lastfmapi');
+const Disconnect = require("disconnect");
+const Discogs = Disconnect.Client;
+
+const client = new Discogs(
+    'SpinUp/1.0.0',
+    {
+        consumerKey: 'UkhOoJbzsZygZxSqiwwU',
+        consumerSecret: 'LuvwuNvAZgsWXnwdIivUwHmDIqFLcbEc'
+    });
+
+const userCollection = client.user().collection();
+const db = client.database();
 
 const lastfm = new LastfmAPI({
     'api_key': '3d80c6e4dcdfbf7849574d4bfe167e1a',
@@ -53,9 +65,24 @@ module.exports.getAllArtistIDs = () => {
     });
 }
 
-getAlbumImageLastfm = (artistName, albumName) => {
+module.exports.getAllArtistsForUser = (username) => {
+    return userCollection.getReleases(username, 0, { page: 1, per_page: 1000 })
+        .then((data) => {
+            let artistIDs = [];
+            data.releases.forEach(release => {
+                let releaseArtists = release.basic_information.artists;
 
-};
+                releaseArtists.forEach(artist => {
+                    artistIDs.push(artist.id);
+                })
+            });
+
+            return uniq(artistIDs);
+        })
+        .then((artistIDs) => {
+            return knex('artist').whereIn('DISCOGS_ARTIST_ID', artistIDs);
+        });
+}
 
 getArtistImageLastfm = (artistName) => {
     return new Promise((resolve) => {
@@ -94,7 +121,17 @@ module.exports.getRecentReleaseForArtist = (artistId) => {
     });
 };
 
+module.exports.getMostRecentReleasesForUserArtists = (username) => {
+    return new Promise((resolve) => {
+        return knex('artist')
+            .where()
+    });
+}
+
 /**
  * Return in een promise.
  * Resolve als het moet aflopen.
  */
+
+// Custom shit.
+let uniq = array => [...new Set(array)];

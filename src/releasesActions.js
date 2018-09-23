@@ -19,7 +19,7 @@ const db = client.database();
  * 
  * @param {string} username 
  */
-module.exports.getArtistsForUsername = (username) => {
+module.exports.createArtistsForUsername = (username) => {
     return userCollection.getReleases(username, 0, { page: 1, per_page: 1000 })
         .then((data) => {
             return createArtistsForUsername(data.releases);
@@ -56,13 +56,20 @@ module.exports.updateReleases = () => {
 };
 
 module.exports.getRecentReleaseForArtist = (id) => {
-    return new Promise((resolve) => {
-        localdb.getRecentReleaseForArtist(id)
+    return Promise.resolve().then(() => {
+        return localdb.getRecentReleaseForArtist(id)
             .then((release) => {
-                console.log(release);
+                return release;
             });
     })
 };
+
+module.exports.getUserArtists = (username) => {
+    return localdb.getAllArtistsForUser(username)
+        .then(artists => {
+            return artists;
+        });
+}
 
 /**
  * Create new entries for every artist in the user's collection.
@@ -84,6 +91,33 @@ createArtistsForUsername = (releases) => {
             resolve('Successfully created new artists!');
         } catch (err) {
             console.log('fetchReleasesForArtists: ' + err);
+            reject('Something went wrong...');
+        }
+    });
+};
+
+/** ON HOLD */
+getArtistsFromReleases = (releases) => {
+    return Promise.resolve().then(() => {
+        try {
+            let userArtists = [];
+
+            releases.forEach(release => {
+                let releaseArtists = release.basic_information.artists;
+                releaseArtists.forEach(artist => {
+                    artistName = artist.name.replace(/ \(\d+\)/, '');
+
+
+                    const DBartist = new Artist(artist.id, artistName, artist.picture_url);
+
+                    userArtists.push(DBartist);
+                });
+            });
+
+            return userArtists;
+
+        } catch (err) {
+            console.log('getArtistsFromReleases: ' + err);
             reject('Something went wrong...');
         }
     });
