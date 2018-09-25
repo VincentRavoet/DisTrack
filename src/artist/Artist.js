@@ -1,8 +1,8 @@
 class Artist {
-    constructor(id, name, picture) {
+    constructor(id, name, picture_url) {
         this.discogs_artist_id = id;
         this.name = name;
-        this.picture = picture;
+        this.picture_url = picture_url;
     }
 
     set Id(id) {
@@ -21,12 +21,12 @@ class Artist {
         return this.name;
     }
 
-    set Picture(picture) {
-        this.picture = picture;
+    set Picture_url(picture_url) {
+        this.picture_url = picture_url;
     }
 
-    get Picture() {
-        return this.picture;
+    get Picture_url() {
+        return this.picture_url;
     }
 };
 

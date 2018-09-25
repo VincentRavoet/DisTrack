@@ -1,8 +1,9 @@
 class RecentRelease {
-    constructor(releaseId, title, releaseUrl, id) {
+    constructor(releaseId, title, releaseUrl, picture_url, id) {
         this.discogs_release_id = releaseId;
         this.title = title;
         this.discogs_release_url = releaseUrl;
+        this.picture_url = picture_url;
         this.discogs_artist_id = id;
     }
 
@@ -28,6 +29,14 @@ class RecentRelease {
 
     get DiscogsReleaseUrl() {
         return this.discogs_release_url;
+    }
+
+    set Picture_url(url) {
+        this.picture_url = url;
+    }
+
+    get Picture_url() {
+        return this.picture_url;
     }
 
     set DiscogsArtistId(id) {

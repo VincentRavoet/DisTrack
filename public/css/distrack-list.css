@@ -25,6 +25,7 @@
 
 .release-cover {
     padding-top: 15px;
+    overflow: hidden;
 }
 
 .artist-name {

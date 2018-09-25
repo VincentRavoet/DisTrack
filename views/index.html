@@ -18,7 +18,7 @@
     </video>
 
     <div class="row ml-0 col-sm-12">
-        <div class="col-sm-4">
+        <div id="left-form" class="col-sm-4">
             <div id="title" class="offset-1">
                 <h1>DisTrack</h1>
                 <p>New shit.</p>
@@ -29,27 +29,20 @@
                         <div class="input-group">
                             <label>
                                 <input id="discogs-username" name="username" class="form-control" placeholder="Enter your Discogs username..."
-                                    style="background-color:rgba(0,0,0,0) !important;box-shadow:none !important;"></input>
+                                    style="background-color:rgba(0,0,0,0) !important;box-shadow:none !important;"
+                                    autocorrect="off" autocapitalize="off" spellcheck="false"></input>
                                 <span></span>
                             </label>
                         </div>
                     </form>
                 </div>
             </div>
+            <div class="py-3 offset-1">
+                <a href="https://github.com/VincentRavoet/DisTrack" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
         </div>
-        <div id="distrack_list" class="row col-sm-8">
-
-
-        </div>
+        <div id="distrack_list" class="row col-sm-8 offset-4"></div>
     </div>
-
-    <footer class="page-footer font-small blue">
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">
-            <a href="https://github.com/VincentRavoet/DisTrack" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        <!-- Copyright -->
-    </footer>
 </body>
 
 </html>

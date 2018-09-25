@@ -29,6 +29,12 @@ body {
     opacity: 0.5;
 }
 
+#left-form {
+    position: fixed;
+    display: block;
+    height: 100%;
+}
+
 #title h1 {
     font-size: 80px;
     margin-left: -6px;
@@ -87,18 +93,11 @@ label {
     transition: width 400ms ease-in-out;
   }
 
-  footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    line-height: 40px;
-  }
-
   .fa-github {
-      color: white;
+    color: white;
     font-size: 40px;
-    float: right;
-    margin: 15px;
+    position: fixed;
+    bottom: 15px;
     transition: color .1s ease-in
   }
 

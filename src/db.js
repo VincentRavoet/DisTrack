@@ -80,7 +80,7 @@ module.exports.getAllArtistsForUser = (username) => {
             return uniq(artistIDs);
         })
         .then((artistIDs) => {
-            return knex('artist').whereIn('DISCOGS_ARTIST_ID', artistIDs);
+            return knex('artist').whereIn('DISCOGS_ARTIST_ID', artistIDs).orderBy('name', 'asc');
         });
 }
 
@@ -100,12 +100,12 @@ getArtistImageLastfm = (artistName) => {
                 }
 
                 if (!image) {
-                    image = 'NO PICTURE FOUND';
+                    image = DEFAULT_ARTIST_IMAGE;
                 }
 
                 resolve(image);
             } catch (err) {
-                resolve('NO PICTURE');
+                resolve(DEFAULT_ARTIST_IMAGE);
             }
         });
     });
@@ -135,3 +135,6 @@ module.exports.getMostRecentReleasesForUserArtists = (username) => {
 
 // Custom shit.
 let uniq = array => [...new Set(array)];
+
+const DEFAULT_ARTIST_IMAGE = 'https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png';
+const DEFAULT_ALBUM_IMAGE = 'https://theartsdesk.com/sites/default/files/images/stories/NEW_MUSIC/thomas_h_green/v%20souvenir.png';

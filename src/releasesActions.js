@@ -43,7 +43,7 @@ module.exports.updateReleases = () => {
                             err ? console.log(err) : console.log('Artist ID: ' + id);
                             if (data && data.hasOwnProperty('releases')) {
                                 const json = data.releases[0];
-                                const release = new RecentRelease(json.id, json.title, json.resource_url, id);
+                                const release = new RecentRelease(json.id, json.title, json.resource_url, json.thumb, id);
 
                                 localdb.createRecentRelease(release);
                             }
