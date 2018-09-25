@@ -53,12 +53,30 @@ body {
     margin-bottom: -475px;
 }
 
-#discogs-username {
+#discogs-username, #artist-search {
     background: transparent;
     border: none;
     color: white;
     caret-color: #990099;
     padding-bottom: 5px;
+}
+
+#lastfmArtistSearch label {
+    margin-bottom: 0;
+}
+
+#artist-search-results {
+    width: 308px;
+    background: white;
+    color: black;
+    display: table;
+}
+
+#artist-search-name {
+    font-size: 100%;
+    vertical-align: middle;
+    display: table-cell;
+
 }
 
 label {

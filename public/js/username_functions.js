@@ -11,12 +11,12 @@ $(document).ready(function () {
         sendAjax("/updateReleaseForAllArtists");
     });
 
-    $("#discogs-username").focus(function () {
-        $('#bgVideo').fadeTo('fast', 0.2);
+    $("input").focus(function () {
+        $('#bgVideo').fadeTo(100, 0.2);
     });
 
-    $("#discogs-username").focusout(function () {
-        $('#bgVideo').fadeTo('fast', 0.5);
+    $("input").focusout(function () {
+        $('#bgVideo').fadeTo(100, 0.5);
     });
 
     $('#storeArtistsForUsername').on('click', () => {
@@ -27,7 +27,7 @@ $(document).ready(function () {
     $('#getArtistsForUsername').on('submit', (e) => {
         e.preventDefault();
 
-        $('#discogs-username').focusout();
+        $('#input').focusout();
 
         var usernameJson = $("#getArtistsForUsername").serializeArray().reduce((m, o) => { m[o.name] = o.value; return m; }, {})
 
@@ -44,8 +44,6 @@ $(document).ready(function () {
                 })
             })
         })
-
-
     });
 
     sendAjax = (url) => {
